@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vocabulaire A-Level · Français</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F2E9;
+  --paper-dim:#ECE4D3;
+  --ink:#1F2430;
+  --ink-soft:#5B5F6E;
+  --bordeaux:#7A2331;
+  --bordeaux-dark:#5C1A25;
+  --bleu:#2C3E66;
+  --bleu-dark:#1E2C4A;
+  --or:#B8922E;
+  --sauge:#5E7355;
+  --error:#8B3A3A;
+  --line: rgba(31,36,48,0.14);
+  --radius: 12px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--paper);
+  background-image:
+    repeating-linear-gradient(180deg, rgba(31,36,48,0.035) 0px, rgba(31,36,48,0.035) 1px, transparent 1px, transparent 34px);
+  color:var(--ink);
+  font-family:'Work Sans', sans-serif;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+h1,h2,h3,.display{font-family:'Cormorant Garamond', serif;}
+.wrap{width:100%;max-width:640px;padding:20px 18px 60px;}
+header.top{
+  display:flex; align-items:baseline; justify-content:space-between;
+  padding:20px 4px 16px; border-bottom:2px solid var(--ink);
+  margin-bottom:22px;
+}
+header.top .brand{display:flex;align-items:center;gap:11px;}
+header.top h1{font-size:1.7rem;font-weight:700;margin:0;letter-spacing:0.2px;}
+header.top .flag-chip{
+  width:24px;height:18px;border-radius:2px; overflow:hidden;
+  display:flex; border:1px solid var(--ink);
+}
+header.top .flag-chip span{flex:1;}
+header.top .flag-chip span:nth-child(1){background:#2C3E66;}
+header.top .flag-chip span:nth-child(2){background:#F6F2E9;}
+header.top .flag-chip span:nth-child(3){background:#7A2331;}
+header.top .stat-pill{
+  font-size:0.78rem; color:var(--ink-soft); text-align:right; font-style:italic;
+}
+.card{
+  background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+  padding:22px; margin-bottom:16px;
+  box-shadow: 0 1px 0 rgba(31,36,48,0.03);
+}
+.screen{display:none;}
+.screen.active{display:block;}
+
+/* ---- setup screen ---- */
+.section-label{
+  font-size:0.72rem; text-transform:uppercase; letter-spacing:1.2px;
+  color:var(--bleu-dark); font-weight:700; margin:0 0 10px;
+}
+.topic-grid{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:6px;}
+@media (max-width:420px){.topic-grid{grid-template-columns:1fr;}}
+.topic-chip{
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+  border:1.5px solid var(--line); border-radius:9px; padding:10px 12px;
+  cursor:pointer; user-select:none; font-size:0.86rem; transition:.12s;
+  background:var(--paper);
+}
+.topic-chip.on{border-color:var(--bleu); background:#EAEEF5; color:var(--bleu-dark);}
+.topic-chip .name{font-weight:600;}
+.topic-chip .count{font-size:0.72rem; color:var(--ink-soft); font-weight:500;}
+.topic-chip.on .count{color:var(--bleu-dark);}
+.topic-row-left{display:flex; align-items:center;}
+.mastery-dot{
+  width:8px;height:8px;border-radius:50%; margin-right:6px; flex-shrink:0;
+  background:var(--line); display:inline-block;
+}
+.mastery-dot.box1{background:var(--line);}
+.mastery-dot.box23{background:var(--or);}
+.mastery-dot.box45{background:var(--sauge);}
+
+.pick-row{display:flex; gap:8px; margin:10px 0 22px;}
+.mini-btn{
+  border:1px solid var(--line); background:var(--paper); color:var(--ink-soft);
+  padding:5px 12px; border-radius:20px; font-size:0.75rem; cursor:pointer; font-family:inherit;
+}
+.mini-btn:hover{border-color:var(--bleu); color:var(--bleu-dark);}
+
+.option-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:22px;}
+.option-btn{
+  border:1.5px solid var(--line); background:#fff; border-radius:9px;
+  padding:12px 6px; text-align:center; cursor:pointer; font-family:inherit; font-size:0.83rem;
+  color:var(--ink); font-weight:500;
+}
+.option-btn.selected{border-color:var(--bordeaux); background:#F6E9EA; color:var(--bordeaux-dark);}
+
+.big-btn{
+  width:100%; padding:16px; border:none; border-radius:10px;
+  background:var(--bordeaux); color:#fff; font-family:'Cormorant Garamond',serif;
+  font-size:1.25rem; font-weight:700; letter-spacing:0.3px; cursor:pointer;
+  box-shadow: 0 3px 0 var(--bordeaux-dark);
+}
+.big-btn:active{transform:translateY(2px); box-shadow:0 1px 0 var(--bordeaux-dark);}
+.big-btn:disabled{background:#c9c2b4; box-shadow:none; cursor:not-allowed;}
+.ghost-btn{
+  width:100%; padding:12px; border:1.5px solid var(--line); border-radius:10px;
+  background:transparent; color:var(--ink-soft); font-family:inherit; font-size:0.9rem;
+  cursor:pointer; margin-top:10px;
+}
+
+/* ---- quiz screen ---- */
+.progress-track{height:6px; background:var(--paper-dim); border-radius:4px; overflow:hidden; margin-bottom:20px;}
+.progress-fill{height:100%; background:var(--bleu); transition:width .25s;}
+.quiz-topic-tag{
+  font-size:0.7rem; text-transform:uppercase; letter-spacing:1px; color:var(--bleu-dark);
+  font-weight:700; margin-bottom:10px;
+}
+.prompt-card{
+  text-align:center; padding:38px 18px; border-radius:var(--radius);
+  background:var(--paper-dim); border:1px solid var(--line); margin-bottom:20px;
+  position:relative;
+}
+.prompt-word{font-family:'Cormorant Garamond',serif; font-size:2.1rem; font-weight:700; margin:0 0 6px;}
+.prompt-hint{font-size:0.82rem; color:var(--ink-soft); font-style:italic;}
+.audio-btn{
+  position:absolute; top:12px; right:12px; width:38px; height:38px; border-radius:50%;
+  border:1.5px solid var(--line); background:#fff; cursor:pointer; font-size:1.1rem;
+  display:flex; align-items:center; justify-content:center;
+}
+.answer-options{display:flex; flex-direction:column; gap:10px; margin-bottom:16px;}
+.answer-opt{
+  text-align:left; padding:14px 16px; border-radius:9px; border:1.5px solid var(--line);
+  background:#fff; font-family:inherit; font-size:1rem; cursor:pointer; color:var(--ink);
+}
+.answer-opt.correct{border-color:var(--sauge); background:#EEF1E9; color:#3c4a34;}
+.answer-opt.wrong{border-color:var(--error); background:#F6E9E9; color:var(--error);}
+.answer-opt:disabled{cursor:default;}
+.type-row{display:flex; gap:8px; margin-bottom:16px;}
+.type-row input{
+  flex:1; padding:14px 14px; border-radius:9px; border:1.5px solid var(--line);
+  font-family:inherit; font-size:1rem;
+}
+.type-row input.correct{border-color:var(--sauge); background:#EEF1E9;}
+.type-row input.wrong{border-color:var(--error); background:#F6E9E9;}
+.feedback-line{min-height:24px; font-size:0.88rem; margin-bottom:8px; font-weight:500;}
+.feedback-line.correct{color:var(--sauge);}
+.feedback-line.wrong{color:var(--error);}
+.flash-card{
+  min-height:150px; text-align:center; padding:38px 18px; border-radius:var(--radius);
+  background:var(--paper-dim); border:1px solid var(--line); margin-bottom:16px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; flex-direction:column;
+}
+.flash-face{font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:700;}
+.flash-sub{font-size:0.8rem; color:var(--ink-soft); margin-top:10px; font-style:italic;}
+.grade-row{display:flex; gap:10px; margin-bottom:16px;}
+.grade-row button{
+  flex:1; padding:13px; border-radius:9px; border:none; font-family:inherit; font-weight:600; cursor:pointer;
+}
+.grade-again{background:#F6E9E9; color:var(--error);}
+.grade-good{background:#EEF1E9; color:#3c4a34;}
+
+/* ---- ribbon seal (signature element) ---- */
+.ribbon{
+  width:150px; margin:0 auto 18px; position:relative;
+}
+.ribbon-body{
+  background:var(--bordeaux); color:#fff; font-family:'Cormorant Garamond',serif;
+  font-weight:700; font-size:1rem; text-align:center; padding:14px 10px 20px;
+  clip-path: polygon(0 0, 100% 0, 100% 78%, 50% 100%, 0 78%);
+  line-height:1.25;
+}
+
+.summary-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:18px; text-align:center;}
+.summary-grid .num{font-family:'Cormorant Garamond',serif; font-size:1.7rem; font-weight:700;}
+.summary-grid .lbl{font-size:0.7rem; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.6px;}
+
+/* ---- stats screen ---- */
+.stat-topic-row{display:flex; flex-wrap:wrap; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid var(--line);}
+.stat-topic-row:last-child{border-bottom:none;}
+.stat-topic-row .name{flex:1.3; font-size:0.85rem; font-weight:600;}
+.bar-track{flex:2; height:8px; background:var(--paper-dim); border-radius:4px; overflow:hidden; display:flex;}
+.bar-seg{height:100%;}
+.stat-topic-row .pct{width:38px; text-align:right; font-size:0.78rem; color:var(--ink-soft);}
+.stat-topic-row .learning-note{flex-basis:100%; text-align:right; font-size:0.7rem; color:var(--or); opacity:0.9;}
+.stats-legend{font-size:0.72rem; color:var(--ink-soft); margin:-4px 0 12px; font-style:italic;}
+.stats-legend .dot{display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:3px; vertical-align:middle;}
+
+.footnote{font-size:0.76rem; color:var(--ink-soft); text-align:center; margin-top:24px; line-height:1.55;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <span class="flag-chip"><span></span><span></span><span></span></span>
+      <h1>Vocabulaire&nbsp;A-Level</h1>
+    </div>
+    <div class="stat-pill" id="headerStat">0 mots maîtrisés</div>
+  </header>
+
+  <!-- ============ SETUP SCREEN ============ -->
+  <div class="screen active" id="screen-setup">
+    <div class="card">
+      <p class="section-label">Thèmes</p>
+      <div class="pick-row">
+        <button class="mini-btn" onclick="selectAllTopics(true)">Tout sélectionner</button>
+        <button class="mini-btn" onclick="selectAllTopics(false)">Aucun</button>
+      </div>
+      <div class="topic-grid" id="topicGrid"></div>
+    </div>
+
+    <div class="card">
+      <p class="section-label">Sens</p>
+      <div class="option-grid" id="directionGrid">
+        <button class="option-btn" data-val="fr-en">FR → EN</button>
+        <button class="option-btn" data-val="en-fr">EN → FR</button>
+        <button class="option-btn selected" data-val="mixed">Mixte</button>
+      </div>
+
+      <p class="section-label">Mode</p>
+      <div class="option-grid" id="modeGrid" style="grid-template-columns:repeat(2,1fr);">
+        <button class="option-btn selected" data-val="choice">Choix multiple</button>
+        <button class="option-btn" data-val="typing">Écrire</button>
+        <button class="option-btn" data-val="flash">Cartes</button>
+        <button class="option-btn" data-val="listen">Écouter</button>
+      </div>
+
+      <p class="section-label">Mots par session</p>
+      <div class="option-grid" id="lengthGrid">
+        <button class="option-btn" data-val="10">10</button>
+        <button class="option-btn selected" data-val="15">15</button>
+        <button class="option-btn" data-val="25">25</button>
+      </div>
+    </div>
+
+    <button class="big-btn" id="startBtn" onclick="startSession()">Commencer la session</button>
+    <button class="ghost-btn" onclick="showStats()">Voir les progrès</button>
+  </div>
+
+  <!-- ============ QUIZ SCREEN ============ -->
+  <div class="screen" id="screen-quiz">
+    <div class="card">
+      <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      <div class="quiz-topic-tag" id="quizTopicTag">THÈME</div>
+      <div id="promptArea"></div>
+      <div id="answerArea"></div>
+      <div class="feedback-line" id="feedbackLine"></div>
+    </div>
+  </div>
+
+  <!-- ============ SESSION COMPLETE ============ -->
+  <div class="screen" id="screen-complete">
+    <div class="card" style="text-align:center;">
+      <div class="ribbon"><div class="ribbon-body" id="sealText">SESSION<br>TERMINÉE</div></div>
+      <div class="summary-grid">
+        <div><div class="num" id="sumCorrect">0</div><div class="lbl">Correctes</div></div>
+        <div><div class="num" id="sumTotal">0</div><div class="lbl">Mots</div></div>
+        <div><div class="num" id="sumStreak">0</div><div class="lbl">Série (jours)</div></div>
+      </div>
+      <button class="big-btn" onclick="backToSetup()">Autre session</button>
+      <button class="ghost-btn" onclick="showStats()">Voir les progrès</button>
+    </div>
+  </div>
+
+  <!-- ============ STATS SCREEN ============ -->
+  <div class="screen" id="screen-stats">
+    <div class="card">
+      <p class="section-label">Progrès par thème</p>
+      <p class="stats-legend"><span class="dot" style="background:var(--sauge);"></span>Maîtrisé &nbsp;
+        <span class="dot" style="background:var(--or);"></span>En cours &nbsp;
+        <span class="dot" style="background:var(--paper-dim);border:1px solid var(--line);"></span>Nouveau</p>
+      <div id="statsTopicList"></div>
+    </div>
+    <div class="card">
+      <p class="section-label">Ensemble</p>
+      <div class="summary-grid">
+        <div><div class="num" id="statNew">0</div><div class="lbl">Nouveaux</div></div>
+        <div><div class="num" id="statLearning">0</div><div class="lbl">En cours</div></div>
+        <div><div class="num" id="statMastered">0</div><div class="lbl">Maîtrisés</div></div>
+      </div>
+    </div>
+    <button class="ghost-btn" onclick="backToSetup()">← Retour</button>
+  </div>
+
+  <p class="footnote">
+    Couvre le vocabulaire clé de niveau A-Level (société, cybersociété, culture, immigration,
+    engagement politique, écologie, justice, égalité des sexes, travail, éducation, santé,
+    connecteurs de dissertation, verbes avancés). Ne remplace pas la liste officielle de votre
+    programme — à utiliser comme révision complémentaire.
+  </p>
+</div>
+
+<script>
+/* =========================================================
+   VOCAB DATA — [french, english, topicCode]
+   ========================================================= */
+const TOPICS = {
+  fa:{name:"Famille et relations"},
+  cy:{name:"Cybersociété"},
+  cu:{name:"Culture et cinéma"},
+  me:{name:"Médias et presse"},
+  im:{name:"Immigration et société"},
+  po:{name:"Engagement politique"},
+  ec:{name:"Écologie"},
+  ju:{name:"Justice et criminalité"},
+  eg:{name:"Égalité des sexes"},
+  tr:{name:"Travail et économie"},
+  ens:{name:"Éducation supérieure"},
+  sa:{name:"Santé et bien-être"},
+  co:{name:"Connecteurs de dissertation"},
+  ve:{name:"Verbes avancés"},
+  li:{name:"Littérature et analyse"},
+  mo:{name:"Le monde francophone"},
+  hi:{name:"Histoire et mémoire"},
+  eu:{name:"Union européenne et mondialisation"},
+  re:{name:"Religion et laïcité"},
+  sp:{name:"Sport et loisirs"},
+  ar:{name:"Arts et patrimoine"},
+  gr:{name:"Expressions idiomatiques"},
+  qu:{name:"Quantité, temps, comparaison"},
+  c1:{name:"Verbes DALF C1"}
+};
+
+const VOCAB = [
+// -- FA (50) --
+['la cellule familiale','family unit','fa'],['la famille recomposée','blended family','fa'],
+['la famille monoparentale','single-parent family','fa'],['le foyer','household / home','fa'],
+['cohabiter','to cohabit','fa'],['se pacser','to enter a civil partnership','fa'],
+['le PACS','civil partnership','fa'],['la garde alternée','shared custody','fa'],
+['le beau-père','stepfather','fa'],['la belle-mère','stepmother','fa'],
+['élever un enfant','to raise a child','fa'],['le fossé des générations','generation gap','fa'],
+['les liens familiaux','family ties','fa'],['la rupture','break-up','fa'],
+['l\'union libre','cohabitation (unmarried)','fa'],['subvenir aux besoins de','to provide for','fa'],
+['le rôle parental','parental role','fa'],['la solidarité familiale','family solidarity','fa'],
+['l\'autorité parentale','parental authority','fa'],['s\'épanouir','to flourish / develop','fa'],
+['le noyau familial','family core / nucleus','fa'],['tisser des liens','to form bonds','fa'],
+['la dépendance affective','emotional dependency','fa'],['le soutien moral','moral / emotional support','fa'],
+['le lien du sang','blood tie','fa'],['le mariage','marriage','fa'],
+['se marier','to get married','fa'],['l\'aîné(e)','the eldest (child)','fa'],
+['le cadet','the youngest (child)','fa'],['le fils unique','only child (son)','fa'],
+['les demi-frères et sœurs','half-siblings / step-siblings','fa'],['la fratrie','siblings (collective)','fa'],
+['le veuf','widower','fa'],['orphelin(e)','orphan(ed)','fa'],
+['adopter','to adopt','fa'],['l\'adoption','adoption','fa'],
+['la belle-famille','in-laws','fa'],['le conjoint','spouse / partner','fa'],
+['l\'entente','understanding / harmony (relationship)','fa'],['se disputer','to argue','fa'],
+['se réconcilier','to make up / reconcile','fa'],['la confiance mutuelle','mutual trust','fa'],
+['l\'éducation bienveillante','gentle / mindful parenting','fa'],['imposer des limites','to set boundaries','fa'],
+['le respect mutuel','mutual respect','fa'],['un foyer éclaté','a broken home','fa'],
+['grandir dans','to grow up in','fa'],['peser sur','to weigh on (a relationship)','fa'],
+['la transmission des valeurs','transmission of values','fa'],['s\'émanciper de','to become independent from','fa'],
+
+// -- CY (50) --
+['les réseaux sociaux','social media','cy'],['la vie privée','private life / privacy','cy'],
+['la protection des données','data protection','cy'],['le harcèlement en ligne','online harassment','cy'],
+['l\'anonymat','anonymity','cy'],['la désinformation','misinformation','cy'],
+['les fake news','fake news','cy'],['l\'addiction aux écrans','screen addiction','cy'],
+['le temps d\'écran','screen time','cy'],['la fracture numérique','digital divide','cy'],
+['l\'identité numérique','digital identity','cy'],['divulguer','to disclose / reveal','cy'],
+['la surveillance','surveillance','cy'],['le piratage','hacking','cy'],
+['l\'usurpation d\'identité','identity theft','cy'],['un influenceur','influencer','cy'],
+['la portée','reach (of content)','cy'],['devenir viral','to go viral','cy'],
+['se déconnecter','to disconnect / log off','cy'],['nuire à','to harm','cy'],
+['répandre','to spread (rumours, info)','cy'],['la manipulation','manipulation','cy'],
+['menacer','to threaten','cy'],['un algorithme','an algorithm','cy'],
+['la bulle de filtre','filter bubble','cy'],['le fil d\'actualité','news feed','cy'],
+['publier','to post','cy'],['un abonné','a follower (social media)','cy'],
+['s\'abonner à','to follow / subscribe to','cy'],['un like','a like','cy'],
+['partager du contenu','to share content','cy'],['la notoriété en ligne','online fame','cy'],
+['le trolling','trolling','cy'],['un troll','a troll (person)','cy'],
+['insulter','to insult','cy'],['diffuser','to broadcast / disseminate','cy'],
+['la rumeur','rumour','cy'],['vérifier une source','to verify a source','cy'],
+['la citoyenneté numérique','digital citizenship','cy'],['l\'empreinte numérique','digital footprint','cy'],
+['le cybercriminel','cybercriminal','cy'],['l\'escroquerie en ligne','online scam','cy'],
+['le harcèlement scolaire','school bullying','cy'],['isoler','to isolate','cy'],
+['l\'estime de soi en ligne','online self-esteem','cy'],['comparer sa vie à celle des autres','to compare one\'s life to others\'','cy'],
+['l\'image idéalisée','idealised image','cy'],['la déconnexion numérique','digital detox','cy'],
+['réguler','to regulate','cy'],['un géant du numérique','a tech giant','cy'],
+
+// -- CU (45) --
+['le patrimoine culturel','cultural heritage','cu'],['la mondialisation culturelle','cultural globalisation','cu'],
+['un chef-d\'œuvre','masterpiece','cu'],['le septième art','cinema ("the seventh art")','cu'],
+['le réalisateur','director','cu'],['le scénario','screenplay','cu'],
+['la bande originale','soundtrack','cu'],['le box-office','box office','cu'],
+['la critique','review / criticism','cu'],['susciter','to provoke / arouse (emotion)','cu'],
+['véhiculer des valeurs','to convey values','cu'],['refléter la société','to reflect society','cu'],
+['un genre cinématographique','film genre','cu'],['la censure','censorship','cu'],
+['la diversité culturelle','cultural diversity','cu'],['préserver','to preserve','cu'],
+['le rayonnement culturel','cultural influence','cu'],['subventionner','to subsidise','cu'],
+['l\'exception culturelle','cultural exception (French policy)','cu'],['un tournage','a film shoot','cu'],
+['le casting','casting','cu'],['l\'intrigue','the plot','cu'],
+['le protagoniste','the protagonist','cu'],['le personnage principal','the main character','cu'],
+['l\'interprétation','the performance / acting','cu'],['jouer un rôle','to play a role','cu'],
+['la mise en scène','staging / direction','cu'],['le décor','the set / scenery','cu'],
+['les effets spéciaux','special effects','cu'],['un long métrage','a feature film','cu'],
+['un court métrage','a short film','cu'],['un documentaire','a documentary','cu'],
+['sortir en salles','to be released in cinemas','cu'],['un remake','a remake','cu'],
+['adapter un roman','to adapt a novel','cu'],['fidèle à l\'œuvre originale','faithful to the original work','cu'],
+['le public visé','the target audience','cu'],['toucher un large public','to reach a wide audience','cu'],
+['le succès commercial','commercial success','cu'],['un four (au box-office)','a flop','cu'],
+['la nouvelle vague','the New Wave (French cinema movement)','cu'],['un cinéaste engagé','a politically engaged filmmaker','cu'],
+['retracer','to retrace / depict (a story)','cu'],['dénoncer','to denounce / expose','cu'],
+['mettre en lumière','to shed light on','cu'],
+
+// -- ME (40) --
+['la presse écrite','print press','me'],['un quotidien','a daily newspaper','me'],
+['un hebdomadaire','a weekly (publication)','me'],['la une','the front page','me'],
+['un article de fond','an in-depth article','me'],['un éditorial','an editorial','me'],
+['un journaliste d\'investigation','investigative journalist','me'],['la ligne éditoriale','editorial stance','me'],
+['l\'objectivité journalistique','journalistic objectivity','me'],['la déontologie','code of ethics / professional conduct','me'],
+['la liberté de la presse','freedom of the press','me'],['la liberté d\'expression','freedom of speech','me'],
+['censurer','to censor','me'],['un scoop','a scoop','me'],
+['un tirage','a print run / circulation','me'],['le lectorat','readership','me'],
+['un abonnement','a subscription','me'],['la presse people','celebrity / tabloid press','me'],
+['le sensationnalisme','sensationalism','me'],['un scandale médiatique','media scandal','me'],
+['la chaîne d\'information','news channel','me'],['le journal télévisé','TV news bulletin','me'],
+['un présentateur','a news presenter','me'],['un reportage','a report / news feature','me'],
+['couvrir un événement','to cover an event','me'],['diffuser en direct','to broadcast live','me'],
+['les médias traditionnels','traditional media','me'],['la fiabilité des sources','reliability of sources','me'],
+['manipuler l\'opinion publique','to manipulate public opinion','me'],['l\'opinion publique','public opinion','me'],
+['influencer','to influence','me'],['un communiqué de presse','a press release','me'],
+['un porte-parole','a spokesperson','me'],['la propagande','propaganda','me'],
+['biaisé','biased','me'],['impartial','impartial','me'],
+['la crédibilité','credibility','me'],['un fait divers','a news item / human-interest story','me'],
+['l\'audimat','TV ratings','me'],['la rédaction','the editorial team / newsroom','me'],
+
+// -- IM (50) --
+['un immigré','immigrant','im'],['un demandeur d\'asile','asylum seeker','im'],
+['un réfugié','refugee','im'],['accueillir','to welcome / host','im'],
+['l\'intégration','integration','im'],['s\'intégrer','to integrate','im'],
+['le rejet','rejection','im'],['la xénophobie','xenophobia','im'],
+['les préjugés','prejudice','im'],['la discrimination','discrimination','im'],
+['le racisme','racism','im'],['la tolérance','tolerance','im'],
+['la cohabitation','coexistence','im'],['la laïcité','secularism','im'],
+['le communautarisme','communalism','im'],['la double culture','dual culture / identity','im'],
+['l\'assimilation','assimilation','im'],['la richesse culturelle','cultural richness','im'],
+['enrichir','to enrich','im'],['le repli sur soi','withdrawal / isolationism','im'],
+['la coexistence pacifique','peaceful coexistence','im'],['franchir une frontière','to cross a border','im'],
+['fuir la guerre','to flee war','im'],['demander l\'asile','to seek asylum','im'],
+['le statut de réfugié','refugee status','im'],['un sans-papiers','an undocumented migrant','im'],
+['la régularisation','legalisation (of status)','im'],['expulser','to deport','im'],
+['l\'expulsion','deportation','im'],['le centre de rétention','detention centre','im'],
+['la frontière','border','im'],['le passage clandestin','illegal crossing','im'],
+['le passeur','people smuggler','im'],['la traversée','crossing (e.g. the Mediterranean)','im'],
+['naufrager','to be shipwrecked','im'],['un naufrage','a shipwreck','im'],
+['la traite des êtres humains','human trafficking','im'],['le regroupement familial','family reunification','im'],
+['la seconde génération','second generation (immigrants)','im'],['le multiculturalisme','multiculturalism','im'],
+['le vivre-ensemble','living together (social cohesion)','im'],['le ghetto urbain','urban ghetto','im'],
+['la banlieue','suburb (often deprived area in France)','im'],['la stigmatisation','stigmatisation','im'],
+['stigmatiser','to stigmatise','im'],['l\'exclusion sociale','social exclusion','im'],
+['marginaliser','to marginalise','im'],['la marginalisation','marginalisation','im'],
+['accorder l\'asile','to grant asylum','im'],['l\'intégration réussie','successful integration','im'],
+
+// -- PO (55) --
+['le citoyen','citizen','po'],['l\'engagement citoyen','civic engagement','po'],
+['s\'abstenir','to abstain','po'],['le taux d\'abstention','abstention rate','po'],
+['manifester','to demonstrate / protest','po'],['une manifestation','protest / demonstration','po'],
+['la grève','strike','po'],['faire grève','to go on strike','po'],
+['revendiquer','to demand / claim','po'],['le droit de vote','right to vote','po'],
+['la démocratie','democracy','po'],['l\'extrême droite','far right','po'],
+['l\'extrême gauche','far left','po'],['le parti politique','political party','po'],
+['le scrutin','ballot / vote','po'],['l\'électeur','voter (person)','po'],
+['militer','to campaign / be an activist','po'],['un militant','activist','po'],
+['la sensibilisation','awareness-raising','po'],['sensibiliser','to raise awareness','po'],
+['défendre une cause','to defend a cause','po'],['prendre position','to take a stance','po'],
+['le désenchantement politique','political disillusionment','po'],['la citoyenneté','citizenship','po'],
+['le régime politique','political system','po'],['la République','the Republic','po'],
+['la monarchie','monarchy','po'],['la constitution','constitution','po'],
+['le président de la République','the President','po'],['le Premier ministre','the Prime Minister','po'],
+['le gouvernement','the government','po'],['l\'Assemblée nationale','the National Assembly','po'],
+['le Sénat','the Senate','po'],['un député','a Member of Parliament','po'],
+['le mandat','term of office','po'],['les élections législatives','legislative / parliamentary elections','po'],
+['les élections présidentielles','presidential elections','po'],['le second tour','the second round (of voting)','po'],
+['un sondage','an opinion poll','po'],['la coalition','coalition','po'],
+['un référendum','a referendum','po'],['le pouvoir exécutif','executive power','po'],
+['le pouvoir législatif','legislative power','po'],['la séparation des pouvoirs','separation of powers','po'],
+['l\'État de droit','the rule of law','po'],['la corruption','corruption','po'],
+['un scandale politique','political scandal','po'],['la transparence','transparency','po'],
+['la confiance envers les institutions','trust in institutions','po'],['le populisme','populism','po'],
+['un mouvement social','a social movement','po'],['la désobéissance civile','civil disobedience','po'],
+['la répression policière','police crackdown','po'],['un syndicat','a trade union','po'],
+['prendre part au débat public','to take part in public debate','po'],
+
+// -- EC (55) --
+['le réchauffement climatique','global warming','ec'],['l\'empreinte carbone','carbon footprint','ec'],
+['les gaz à effet de serre','greenhouse gases','ec'],['les énergies fossiles','fossil fuels','ec'],
+['les énergies renouvelables','renewable energy','ec'],['la transition énergétique','energy transition','ec'],
+['le développement durable','sustainable development','ec'],['la surconsommation','overconsumption','ec'],
+['gaspiller','to waste','ec'],['le gaspillage','waste / wastage','ec'],
+['la biodiversité','biodiversity','ec'],['la déforestation','deforestation','ec'],
+['la pollution atmosphérique','air pollution','ec'],['la montée des eaux','rising sea levels','ec'],
+['une catastrophe naturelle','natural disaster','ec'],['l\'agriculture intensive','intensive farming','ec'],
+['l\'agriculture biologique','organic farming','ec'],['la sobriété énergétique','energy conservation','ec'],
+['réduire son impact','to reduce one\'s impact','ec'],['la surpêche','overfishing','ec'],
+['l\'espèce menacée','endangered species','ec'],['l\'urgence climatique','climate emergency','ec'],
+['la couche d\'ozone','ozone layer','ec'],['la fonte des glaciers','melting of glaciers','ec'],
+['la sécheresse','drought','ec'],['la canicule','heatwave','ec'],
+['un phénomène météorologique extrême','an extreme weather event','ec'],['l\'élévation du niveau de la mer','rise in sea level','ec'],
+['un écosystème','ecosystem','ec'],['la faune et la flore','wildlife and plant life','ec'],
+['l\'extinction des espèces','species extinction','ec'],['préserver la nature','to preserve nature','ec'],
+['un espace naturel protégé','a protected natural area','ec'],['le braconnage','poaching','ec'],
+['la surexploitation des ressources','overexploitation of resources','ec'],['les ressources naturelles','natural resources','ec'],
+['l\'épuisement des ressources','resource depletion','ec'],['la pollution plastique','plastic pollution','ec'],
+['le plastique à usage unique','single-use plastic','ec'],['les microplastiques','microplastics','ec'],
+['l\'économie circulaire','circular economy','ec'],['le compostage','composting','ec'],
+['composter','to compost','ec'],['le zéro déchet','zero waste','ec'],
+['la consommation responsable','responsible consumption','ec'],['le covoiturage','car-sharing','ec'],
+['les transports en commun','public transport','ec'],['la voiture électrique','electric car','ec'],
+['la taxe carbone','carbon tax','ec'],['la neutralité carbone','carbon neutrality','ec'],
+['un accord international','an international agreement','ec'],['les négociations climatiques','climate negotiations','ec'],
+['le protocole de Kyoto','the Kyoto Protocol','ec'],['l\'accord de Paris','the Paris Agreement','ec'],
+['un lobby industriel','an industrial lobby','ec'],
+
+// -- JU (45) --
+['la délinquance','delinquency / crime','ju'],['le délit','offence','ju'],
+['la peine de mort','death penalty','ju'],['l\'emprisonnement','imprisonment','ju'],
+['purger une peine','to serve a sentence','ju'],['la récidive','reoffending','ju'],
+['un récidiviste','reoffender','ju'],['la réinsertion','rehabilitation (into society)','ju'],
+['le tribunal','court','ju'],['le juge','judge','ju'],
+['condamner','to sentence / condemn','ju'],['acquitter','to acquit','ju'],
+['la victime','victim','ju'],['le coupable','the guilty party','ju'],
+['présumé innocent','presumed innocent','ju'],['la vidéosurveillance','CCTV','ju'],
+['la sécurité publique','public safety','ju'],['la répression','crackdown / repression','ju'],
+['dissuader','to deter','ju'],['le vol','theft','ju'],
+['le cambriolage','burglary','ju'],['un cambrioleur','a burglar','ju'],
+['l\'agression','assault','ju'],['la violence physique','physical violence','ju'],
+['la légitime défense','self-defence','ju'],['un témoin','a witness','ju'],
+['un avocat','a lawyer','ju'],['la défense','the defence (legal)','ju'],
+['l\'accusation','the prosecution','ju'],['un procès','a trial','ju'],
+['comparaître devant le tribunal','to appear before the court','ju'],['plaider coupable','to plead guilty','ju'],
+['plaider non coupable','to plead not guilty','ju'],['un jury','a jury','ju'],
+['la présomption d\'innocence','presumption of innocence','ju'],['un casier judiciaire','a criminal record','ju'],
+['la libération conditionnelle','parole / conditional release','ju'],['les travaux d\'intérêt général','community service','ju'],
+['une amende','a fine','ju'],['la maison d\'arrêt','remand prison','ju'],
+['le taux de criminalité','crime rate','ju'],['la délinquance juvénile','juvenile delinquency','ju'],
+['un mineur délinquant','a young offender','ju'],['prévenir la délinquance','to prevent crime','ju'],
+['la lutte contre la criminalité','the fight against crime','ju'],
+
+// -- EG (45) --
+['l\'égalité des sexes','gender equality','eg'],['le sexisme','sexism','eg'],
+['les inégalités salariales','pay inequality','eg'],['le plafond de verre','glass ceiling','eg'],
+['la parité','parity / equal representation','eg'],['les stéréotypes de genre','gender stereotypes','eg'],
+['l\'émancipation des femmes','women\'s emancipation','eg'],['le féminisme','feminism','eg'],
+['les tâches ménagères','household chores','eg'],['la répartition des tâches','division of labour / tasks','eg'],
+['le congé parental','parental leave','eg'],['les violences conjugales','domestic violence','eg'],
+['le harcèlement sexuel','sexual harassment','eg'],['remettre en question','to question / challenge','eg'],
+['lutter contre','to fight against','eg'],['revendiquer ses droits','to claim one\'s rights','eg'],
+['la discrimination positive','positive discrimination','eg'],['briser les tabous','to break taboos','eg'],
+['véhiculer des stéréotypes','to perpetuate stereotypes','eg'],['le mouvement #MeToo','the #MeToo movement','eg'],
+['dénoncer les abus','to denounce abuse','eg'],['le consentement','consent','eg'],
+['l\'objectification','objectification','eg'],['sexualiser','to sexualise','eg'],
+['l\'identité de genre','gender identity','eg'],['l\'orientation sexuelle','sexual orientation','eg'],
+['l\'homophobie','homophobia','eg'],['la transphobie','transphobia','eg'],
+['les droits LGBT+','LGBT+ rights','eg'],['le mariage pour tous','marriage equality','eg'],
+['la lutte pour les droits civiques','fight for civil rights','eg'],['la ségrégation','segregation','eg'],
+['l\'apartheid','apartheid','eg'],['la ségrégation raciale','racial segregation','eg'],
+['combattre les discriminations','to combat discrimination','eg'],['un préjugé inconscient','unconscious bias','eg'],
+['la discrimination à l\'embauche','discrimination in hiring','eg'],['le quota','quota','eg'],
+['la représentation équilibrée','balanced representation','eg'],['l\'inclusion','inclusion','eg'],
+['inclusif','inclusive','eg'],['l\'accessibilité','accessibility','eg'],
+['un handicap','a disability','eg'],['une personne en situation de handicap','a person with a disability','eg'],
+['l\'égalité des droits','equality of rights','eg'],
+
+// -- TR (55) --
+['le marché du travail','job market','tr'],['le chômage','unemployment','tr'],
+['le taux de chômage','unemployment rate','tr'],['un emploi précaire','precarious job','tr'],
+['la précarité','precariousness / insecurity','tr'],['le CDI','permanent contract','tr'],
+['le CDD','fixed-term contract','tr'],['un stage','internship / work placement','tr'],
+['un stagiaire','intern','tr'],['la formation professionnelle','vocational training','tr'],
+['les compétences','skills','tr'],['l\'employabilité','employability','tr'],
+['la reconversion professionnelle','career change','tr'],['le télétravail','remote working','tr'],
+['l\'équilibre vie pro-vie perso','work-life balance','tr'],['la mondialisation économique','economic globalisation','tr'],
+['délocaliser','to relocate / offshore','tr'],['la délocalisation','offshoring','tr'],
+['licencier','to lay off / dismiss','tr'],['un licenciement','redundancy / dismissal','tr'],
+['l\'entreprise','company / business','tr'],['une multinationale','a multinational company','tr'],
+['une start-up','a start-up','tr'],['un entrepreneur','an entrepreneur','tr'],
+['créer une entreprise','to set up a business','tr'],['le capital','capital','tr'],
+['l\'investissement','investment','tr'],['investir','to invest','tr'],
+['la Bourse','the Stock Exchange','tr'],['les actions','shares / stocks','tr'],
+['la croissance économique','economic growth','tr'],['la récession','recession','tr'],
+['la crise économique','economic crisis','tr'],['l\'inflation','inflation','tr'],
+['le pouvoir d\'achat','purchasing power','tr'],['le salaire minimum','minimum wage','tr'],
+['les cotisations sociales','social security contributions','tr'],['les impôts','taxes','tr'],
+['la fiscalité','taxation','tr'],['le fossé entre riches et pauvres','wealth gap','tr'],
+['les inégalités sociales','social inequality','tr'],['la classe moyenne','the middle class','tr'],
+['la pauvreté','poverty','tr'],['le seuil de pauvreté','the poverty line','tr'],
+['l\'aide sociale','welfare / social assistance','tr'],['le salariat','salaried employment','tr'],
+['un contrat de travail','an employment contract','tr'],['les conditions de travail','working conditions','tr'],
+['l\'exploitation','exploitation','tr'],['la surcharge de travail','work overload','tr'],
+['la productivité','productivity','tr'],['l\'automatisation','automation','tr'],
+['l\'intelligence artificielle','artificial intelligence','tr'],['remplacer la main-d\'œuvre','to replace the workforce','tr'],
+['la robotisation','robotisation','tr'],
+
+// -- ENS (40) --
+['l\'enseignement supérieur','higher education','ens'],['le décrochage scolaire','dropping out of school','ens'],
+['la mixité sociale','social mixing','ens'],['l\'échec scolaire','academic failure','ens'],
+['la réussite scolaire','academic success','ens'],['l\'orientation','careers guidance','ens'],
+['redoubler','to repeat a year','ens'],['un redoublement','repeating a year','ens'],
+['la sélection','selection (university entry)','ens'],['les frais de scolarité','tuition fees','ens'],
+['un cursus','course of study','ens'],['acquérir des connaissances','to acquire knowledge','ens'],
+['épanouir un élève','to help a student flourish','ens'],['l\'égalité des chances','equal opportunity','ens'],
+['démocratiser l\'accès à','to widen access to','ens'],['le bac','A-level equivalent (French school-leaving exam)','ens'],
+['la classe préparatoire','preparatory class (elite higher-ed track)','ens'],['une grande école','elite higher education institution','ens'],
+['un diplôme','a qualification / diploma','ens'],['la scolarité obligatoire','compulsory schooling','ens'],
+['la scolarisation','schooling / education provision','ens'],['un établissement scolaire','a school / educational establishment','ens'],
+['le système éducatif','the education system','ens'],['l\'apprentissage','apprenticeship / learning','ens'],
+['un apprenti','an apprentice','ens'],['évaluer','to assess','ens'],
+['l\'évaluation continue','continuous assessment','ens'],['un examen final','a final exam','ens'],
+['le stress lié aux examens','exam-related stress','ens'],['la pression des résultats','pressure of results','ens'],
+['un enseignant','a teacher','ens'],['transmettre un savoir','to pass on knowledge','ens'],
+['l\'esprit critique','critical thinking','ens'],['développer l\'esprit critique','to develop critical thinking','ens'],
+['l\'autonomie','independence / autonomy','ens'],['l\'apprentissage à distance','distance learning','ens'],
+['le décrochage universitaire','dropping out of university','ens'],['la vie étudiante','student life','ens'],
+['financer ses études','to fund one\'s studies','ens'],['viser l\'excellence','to aim for excellence','ens'],
+
+// -- SA (40) --
+['la santé mentale','mental health','sa'],['le bien-être','wellbeing','sa'],
+['le stress','stress','sa'],['l\'anxiété','anxiety','sa'],
+['le mal-être','malaise / unease','sa'],['le burn-out','burnout','sa'],
+['prendre soin de soi','to take care of oneself','sa'],['le soutien psychologique','psychological support','sa'],
+['l\'estime de soi','self-esteem','sa'],['faire face à','to cope with / face','sa'],
+['la pression sociale','social pressure','sa'],['le suivi médical','medical follow-up','sa'],
+['sensibiliser au bien-être','to raise awareness about wellbeing','sa'],['le système de santé','healthcare system','sa'],
+['l\'accès aux soins','access to healthcare','sa'],['la sécurité sociale','social security / healthcare cover','sa'],
+['le remboursement des soins','reimbursement of healthcare costs','sa'],['un désert médical','a medical desert (area lacking doctors)','sa'],
+['la pénurie de médecins','shortage of doctors','sa'],['la prévention','prevention','sa'],
+['dépister une maladie','to screen for an illness','sa'],['le dépistage','screening','sa'],
+['vacciner','to vaccinate','sa'],['la vaccination','vaccination','sa'],
+['une épidémie','an epidemic','sa'],['une pandémie','a pandemic','sa'],
+['le confinement','lockdown','sa'],['la propagation d\'un virus','the spread of a virus','sa'],
+['l\'obésité','obesity','sa'],['la malbouffe','junk food','sa'],
+['une alimentation équilibrée','a balanced diet','sa'],['sédentaire','sedentary','sa'],
+['l\'activité physique','physical activity','sa'],['sensibiliser aux risques','to raise awareness of risks','sa'],
+['l\'espérance de vie','life expectancy','sa'],['le vieillissement de la population','the ageing population','sa'],
+['la maison de retraite','care home','sa'],['prendre soin d\'un proche','to take care of a relative','sa'],
+['la qualité de vie','quality of life','sa'],['le bien-être psychologique','psychological wellbeing','sa'],
+
+// -- CO (50) --
+['tout d\'abord','first of all','co'],['par ailleurs','moreover','co'],
+['qui plus est','what\'s more','co'],['il n\'en demeure pas moins que','the fact remains that','co'],
+['en revanche','on the other hand','co'],['toutefois','however','co'],
+['néanmoins','nevertheless','co'],['en dépit de','despite','co'],
+['malgré','despite','co'],['de surcroît','furthermore','co'],
+['dans la mesure où','insofar as','co'],['étant donné que','given that','co'],
+['de sorte que','so that','co'],['afin de','in order to','co'],
+['il convient de','it is worth / appropriate to','co'],['force est de constater que','it must be acknowledged that','co'],
+['on ne saurait nier que','one cannot deny that','co'],['il va sans dire que','it goes without saying that','co'],
+['d\'une part...d\'autre part','on one hand...on the other','co'],['en somme','in short','co'],
+['en fin de compte','ultimately','co'],['dans l\'ensemble','on the whole','co'],
+['il s\'agit de','it is about / concerns','co'],['soulever la question de','to raise the question of','co'],
+['mettre en avant','to highlight / put forward','co'],['remettre en cause','to call into question','co'],
+['nuancer','to qualify / add nuance to','co'],['un enjeu','an issue / a stake','co'],
+['à l\'égard de','with regard to','co'],['en outre','furthermore','co'],
+['cela dit','having said that','co'],['somme toute','all things considered','co'],
+['au demeurant','moreover / besides','co'],['d\'autant plus que','all the more so because','co'],
+['dans un premier temps','firstly / initially','co'],['dans un second temps','secondly','co'],
+['en définitive','ultimately','co'],['au final','in the end','co'],
+['pour conclure','to conclude','co'],['en conclusion','in conclusion','co'],
+['il importe de','it is important to','co'],['il n\'empêche que','nevertheless / that said','co'],
+['loin de là','far from it','co'],['à cet égard','in this respect','co'],
+['sur ce point','on this point','co'],['à travers','through','co'],
+['grâce à','thanks to','co'],['faute de','for lack of','co'],
+['en ce qui concerne','as far as ... is concerned','co'],['au sein de','within','co'],
+
+// -- VE (60) --
+['il est indéniable que','it is undeniable that','ve'],['il semblerait que','it would seem that','ve'],
+['bien que','although (+ subj.)','ve'],['à condition que','provided that (+ subj.)','ve'],
+['de peur que','for fear that (+ subj.)','ve'],['souligner','to underline / emphasise','ve'],
+['constater','to note / observe','ve'],['affirmer','to state / assert','ve'],
+['prétendre','to claim','ve'],['nier','to deny','ve'],
+['reconnaître','to acknowledge','ve'],['déplorer','to deplore / lament','ve'],
+['s\'inquiéter de','to worry about','ve'],['se soucier de','to be concerned about','ve'],
+['envisager','to consider / envisage','ve'],['s\'avérer','to turn out to be','ve'],
+['engendrer','to generate / cause','ve'],['entraîner','to lead to / bring about','ve'],
+['favoriser','to favour / promote','ve'],['freiner','to hinder / curb','ve'],
+['pallier','to remedy / compensate for','ve'],['s\'efforcer de','to strive to','ve'],
+['tenir compte de','to take into account','ve'],['il est peu probable que','it is unlikely that (+ subj.)','ve'],
+['il se peut que','it may be that (+ subj.)','ve'],['pour peu que','provided that (+ subj.)','ve'],
+['quoique','although (+ subj.)','ve'],['jusqu\'à ce que','until (+ subj.)','ve'],
+['sans que','without (+ subj.)','ve'],['douter que','to doubt that (+ subj.)','ve'],
+['regretter que','to regret that (+ subj.)','ve'],['craindre que','to fear that (+ subj.)','ve'],
+['supposer','to suppose','ve'],['présumer','to presume','ve'],
+['concevoir','to conceive / design','ve'],['élaborer','to develop / devise','ve'],
+['instaurer','to establish / introduce','ve'],['instituer','to institute','ve'],
+['abolir','to abolish','ve'],['promouvoir','to promote','ve'],
+['encourager','to encourage','ve'],['inciter à','to encourage / incite to','ve'],
+['contraindre','to compel / force','ve'],['s\'opposer à','to oppose','ve'],
+['s\'engager à','to commit to','ve'],['s\'abstenir de','to refrain from','ve'],
+['renoncer à','to give up / renounce','ve'],['persister','to persist','ve'],
+['perdurer','to endure / continue','ve'],['se manifester','to manifest itself / appear','ve'],
+['émerger','to emerge','ve'],['découler de','to stem from','ve'],
+['résulter de','to result from','ve'],['aboutir à','to lead to / result in','ve'],
+['susciter le débat','to spark debate','ve'],['alimenter la polémique','to fuel the controversy','ve'],
+['trancher un débat','to settle a debate','ve'],['peser le pour et le contre','to weigh the pros and cons','ve'],
+['relativiser','to put into perspective','ve'],['atténuer','to lessen / mitigate','ve'],
+
+// -- LI (50) --
+['un roman','a novel','li'],['une nouvelle','a short story','li'],
+['un recueil de poèmes','a poetry collection','li'],['un auteur','an author','li'],
+['un narrateur','a narrator','li'],['le point de vue narratif','narrative point of view','li'],
+['la première personne','first person','li'],['la troisième personne','third person','li'],
+['un personnage','a character','li'],['le héros','the hero','li'],
+['l\'antagoniste','the antagonist','li'],['le dénouement','the ending / resolution','li'],
+['le rebondissement','plot twist','li'],['le cadre','the setting','li'],
+['l\'époque','the era / time period','li'],['le registre','register (of language)','li'],
+['le ton','tone','li'],['le style d\'écriture','writing style','li'],
+['une métaphore','a metaphor','li'],['une comparaison','a simile','li'],
+['le symbolisme','symbolism','li'],['un symbole','a symbol','li'],
+['l\'ironie','irony','li'],['le sarcasme','sarcasm','li'],
+['le sous-entendu','implication / subtext','li'],['l\'allusion','allusion','li'],
+['le contexte historique','historical context','li'],['critiquer la société','to critique society','li'],
+['dénoncer une injustice','to denounce an injustice','li'],['un roman engagé','a politically engaged novel','li'],
+['l\'autobiographie','autobiography','li'],['un récit','a story / narrative','li'],
+['le fil narratif','the narrative thread','li'],['la chute (d\'une histoire)','the twist / ending','li'],
+['le suspense','suspense','li'],['captiver le lecteur','to captivate the reader','li'],
+['une œuvre','a work (of art / literature)','li'],['un classique','a classic','li'],
+['la portée universelle','universal significance','li'],['interpréter un texte','to interpret a text','li'],
+['une lecture critique','a critical reading','li'],['analyser','to analyse','li'],
+['dégager le sens','to draw out the meaning','li'],['illustrer un propos','to illustrate a point','li'],
+['citer','to quote','li'],['une citation','a quotation','li'],
+['évoquer','to evoke','li'],['exprimer un sentiment','to express a feeling','li'],
+['le lecteur','the reader','li'],['la mise en abyme','story within a story','li'],
+
+// -- MO (40) --
+['la francophonie','the French-speaking world','mo'],['un pays francophone','a French-speaking country','mo'],
+['la Belgique','Belgium','mo'],['la Suisse','Switzerland','mo'],
+['le Québec','Quebec','mo'],['le Sénégal','Senegal','mo'],
+['la Côte d\'Ivoire','Ivory Coast','mo'],['le Maroc','Morocco','mo'],
+['l\'Algérie','Algeria','mo'],['la Tunisie','Tunisia','mo'],
+['Haïti','Haiti','mo'],['le créole','Creole (language)','mo'],
+['l\'Afrique de l\'Ouest','West Africa','mo'],['l\'Afrique du Nord','North Africa','mo'],
+['le Maghreb','the Maghreb','mo'],['l\'ancienne colonie','former colony','mo'],
+['la colonisation','colonisation','mo'],['la décolonisation','decolonisation','mo'],
+['l\'indépendance','independence','mo'],['l\'héritage colonial','colonial legacy','mo'],
+['la langue officielle','official language','mo'],['le patois','dialect / local vernacular','mo'],
+['la diversité linguistique','linguistic diversity','mo'],['la diaspora','diaspora','mo'],
+['un pays en voie de développement','a developing country','mo'],['l\'aide au développement','development aid','mo'],
+['la coopération internationale','international cooperation','mo'],['les Départements et Régions d\'Outre-mer','French Overseas Departments and Regions','mo'],
+['la Guadeloupe','Guadeloupe','mo'],['la Martinique','Martinique','mo'],
+['la Réunion','Réunion','mo'],['la Nouvelle-Calédonie','New Caledonia','mo'],
+['l\'identité culturelle','cultural identity','mo'],['la double appartenance','dual belonging / identity','mo'],
+['le métissage','cultural / ethnic mixing','mo'],['la culture créole','Creole culture','mo'],
+['préserver une langue','to preserve a language','mo'],['la revitalisation linguistique','language revitalisation','mo'],
+['l\'Organisation internationale de la Francophonie','the International Organisation of La Francophonie','mo'],['un sommet francophone','a Francophonie summit','mo'],
+
+// -- HI (40) --
+['la Seconde Guerre mondiale','the Second World War','hi'],['l\'Occupation','the Occupation (of France, WWII)','hi'],
+['la Résistance','the Resistance','hi'],['un résistant','a member of the Resistance','hi'],
+['la Collaboration','collaboration (with occupying forces)','hi'],['un collaborateur','a collaborator','hi'],
+['la Libération','the Liberation','hi'],['le régime de Vichy','the Vichy regime','hi'],
+['la Shoah','the Holocaust','hi'],['la déportation','deportation','hi'],
+['un camp de concentration','a concentration camp','hi'],['le devoir de mémoire','the duty to remember','hi'],
+['commémorer','to commemorate','hi'],['une commémoration','a commemoration','hi'],
+['rendre hommage à','to pay tribute to','hi'],['un monument aux morts','a war memorial','hi'],
+['la Première Guerre mondiale','the First World War','hi'],['les tranchées','the trenches','hi'],
+['l\'armistice','the armistice','hi'],['la Révolution française','the French Revolution','hi'],
+['la prise de la Bastille','the storming of the Bastille','hi'],['la monarchie absolue','absolute monarchy','hi'],
+['la chute de la monarchie','the fall of the monarchy','hi'],['la Déclaration des droits de l\'homme','the Declaration of the Rights of Man','hi'],
+['la guillotine','the guillotine','hi'],['la Terreur','the Reign of Terror','hi'],
+['l\'Empire','the Empire','hi'],['Napoléon Bonaparte','Napoleon Bonaparte','hi'],
+['la guerre froide','the Cold War','hi'],['le mur de Berlin','the Berlin Wall','hi'],
+['la construction européenne','European integration / construction','hi'],['tirer les leçons du passé','to learn the lessons of the past','hi'],
+['la mémoire collective','collective memory','hi'],['un devoir de vérité','a duty to the truth','hi'],
+['falsifier l\'histoire','to falsify history','hi'],['le négationnisme','denialism (esp. Holocaust denial)','hi'],
+['la réconciliation nationale','national reconciliation','hi'],['un traité de paix','a peace treaty','hi'],
+['la reconstruction','reconstruction (post-war)','hi'],['l\'héritage historique','historical legacy','hi'],
+
+// -- EU (35) --
+['l\'Union européenne','the European Union','eu'],['un État membre','a member state','eu'],
+['le marché unique','the single market','eu'],['la libre circulation','free movement','eu'],
+['la zone euro','the eurozone','eu'],['la monnaie unique','the single currency','eu'],
+['le Brexit','Brexit','eu'],['quitter l\'UE','to leave the EU','eu'],
+['adhérer à l\'UE','to join the EU','eu'],['la souveraineté nationale','national sovereignty','eu'],
+['céder de la souveraineté','to cede sovereignty','eu'],['les institutions européennes','European institutions','eu'],
+['la Commission européenne','the European Commission','eu'],['le Parlement européen','the European Parliament','eu'],
+['un eurodéputé','a Member of the European Parliament','eu'],['l\'harmonisation des lois','harmonisation of laws','eu'],
+['la mondialisation','globalisation','eu'],['un marché mondial','a global market','eu'],
+['le libre-échange','free trade','eu'],['le protectionnisme','protectionism','eu'],
+['une délocalisation d\'entreprise','business relocation / offshoring','eu'],['la concurrence internationale','international competition','eu'],
+['un accord commercial','a trade agreement','eu'],['les droits de douane','customs duties / tariffs','eu'],
+['l\'interdépendance économique','economic interdependence','eu'],['une chaîne d\'approvisionnement','a supply chain','eu'],
+['la standardisation culturelle','cultural standardisation','eu'],['l\'homogénéisation culturelle','cultural homogenisation','eu'],
+['la résistance à la mondialisation','resistance to globalisation','eu'],['l\'altermondialisme','the alter-globalisation movement','eu'],
+['un pays émergent','an emerging country / economy','eu'],['les puissances économiques','economic powers','eu'],
+['la coopération multilatérale','multilateral cooperation','eu'],['une organisation internationale','an international organisation','eu'],
+['le repli identitaire','identitarian withdrawal','eu'],
+
+// -- RE (30) --
+['la croyance','belief','re'],['la foi','faith','re'],
+['une religion','a religion','re'],['le christianisme','Christianity','re'],
+['l\'islam','Islam','re'],['le judaïsme','Judaism','re'],
+['le bouddhisme','Buddhism','re'],['l\'athéisme','atheism','re'],
+['un athée','an atheist','re'],['un croyant','a believer','re'],
+['pratiquer une religion','to practise a religion','re'],['un lieu de culte','a place of worship','re'],
+['une église','a church','re'],['une mosquée','a mosque','re'],
+['une synagogue','a synagogue','re'],['le voile','the veil / headscarf','re'],
+['le port du voile','the wearing of the veil','re'],['la neutralité religieuse','religious neutrality','re'],
+['la liberté de culte','freedom of worship','re'],['le fondamentalisme','fundamentalism','re'],
+['l\'extrémisme religieux','religious extremism','re'],['la radicalisation','radicalisation','re'],
+['se radicaliser','to become radicalised','re'],['le fanatisme','fanaticism','re'],
+['la tolérance religieuse','religious tolerance','re'],['la séparation de l\'Église et de l\'État','separation of Church and State','re'],
+['un débat de société','a societal debate','re'],['la neutralité de l\'État','neutrality of the state','re'],
+['respecter les convictions d\'autrui','to respect others\' beliefs','re'],['la spiritualité','spirituality','re'],
+
+// -- SP (35) --
+['la pratique sportive','sporting activity / practice','sp'],['un club sportif','a sports club','sp'],
+['s\'entraîner','to train','sp'],['la compétition','competition','sp'],
+['un championnat','a championship','sp'],['une médaille','a medal','sp'],
+['battre un record','to break a record','sp'],['le dopage','doping','sp'],
+['un contrôle antidopage','a doping test / control','sp'],['la triche','cheating','sp'],
+['tricher','to cheat','sp'],['l\'esprit sportif','sportsmanship','sp'],
+['le fair-play','fair play','sp'],['un supporter','a supporter / fan','sp'],
+['la ferveur populaire','public enthusiasm / fervour','sp'],['un événement sportif','a sporting event','sp'],
+['les Jeux olympiques','the Olympic Games','sp'],['la Coupe du monde','the World Cup','sp'],
+['accueillir un événement','to host an event','sp'],['les retombées économiques','economic benefits / spin-offs','sp'],
+['un stade','a stadium','sp'],['la billetterie','ticketing','sp'],
+['un sport de haut niveau','elite-level sport','sp'],['un athlète professionnel','a professional athlete','sp'],
+['la reconversion des sportifs','athletes\' career transition','sp'],['les inégalités dans le sport','inequality in sport','sp'],
+['le sport féminin','women\'s sport','sp'],['la médiatisation du sport','media coverage of sport','sp'],
+['le bien-être physique','physical wellbeing','sp'],['se dépenser','to exert oneself / burn energy','sp'],
+['décompresser','to unwind / de-stress','sp'],['les loisirs créatifs','creative hobbies','sp'],
+['les vacances actives','active holidays','sp'],['la randonnée','hiking','sp'],
+['se ressourcer','to recharge / unwind','sp'],
+
+// -- AR (35) --
+['un musée','a museum','ar'],['une exposition','an exhibition','ar'],
+['un tableau','a painting','ar'],['une sculpture','a sculpture','ar'],
+['un peintre','a painter','ar'],['un sculpteur','a sculptor','ar'],
+['une œuvre d\'art','a work of art','ar'],['une toile','a canvas','ar'],
+['un courant artistique','an artistic movement','ar'],['l\'impressionnisme','Impressionism','ar'],
+['l\'art contemporain','contemporary art','ar'],['une galerie d\'art','an art gallery','ar'],
+['un monument historique','a historic monument','ar'],['un site classé','a listed / protected site','ar'],
+['la restauration d\'un monument','restoration of a monument','ar'],['restaurer','to restore','ar'],
+['la sauvegarde du patrimoine','heritage preservation','ar'],['le patrimoine architectural','architectural heritage','ar'],
+['un vestige','a remnant / relic','ar'],['une ruine','a ruin','ar'],
+['l\'artisanat','craftsmanship / handicrafts','ar'],['un artisan','a craftsperson','ar'],
+['le savoir-faire','know-how / skill','ar'],['une tradition artisanale','a craft tradition','ar'],
+['transmettre un savoir-faire','to pass on a skill','ar'],['un mécène','a patron (of the arts)','ar'],
+['le mécénat','patronage / sponsorship','ar'],['financer la culture','to fund culture','ar'],
+['l\'accès à la culture','access to culture','ar'],['démocratiser la culture','to democratise culture','ar'],
+['une œuvre controversée','a controversial work','ar'],['la provocation artistique','artistic provocation','ar'],
+['la liberté de création','freedom of artistic creation','ar'],['l\'appropriation culturelle','cultural appropriation','ar'],
+['l\'esthétique','aesthetics','ar'],
+
+// -- GR (36) --
+['avoir le cafard','to feel down / blue','gr'],['avoir le cœur sur la main','to be generous / big-hearted','gr'],
+['mettre les pieds dans le plat','to put one\'s foot in it','gr'],['tourner autour du pot','to beat around the bush','gr'],
+['donner sa langue au chat','to give up (guessing)','gr'],['avoir un poil dans la main','to be lazy','gr'],
+['poser un lapin à quelqu\'un','to stand someone up','gr'],['casser les pieds à quelqu\'un','to annoy someone','gr'],
+['avoir la tête dans les nuages','to have one\'s head in the clouds','gr'],['prendre ses jambes à son cou','to run off quickly','gr'],
+['avoir le trac','to have stage fright','gr'],['en avoir marre de','to be fed up with','gr'],
+['faire la sourde oreille','to turn a deaf ear','gr'],['mettre la charrue avant les bœufs','to put the cart before the horse','gr'],
+['avoir un chat dans la gorge','to have a frog in one\'s throat','gr'],['appeler un chat un chat','to call a spade a spade','gr'],
+['il ne faut pas vendre la peau de l\'ours avant de l\'avoir tué','don\'t count your chickens before they hatch','gr'],['qui vivra verra','time will tell','gr'],
+['petit à petit, l\'oiseau fait son nid','little by little, the bird builds its nest','gr'],['l\'habit ne fait pas le moine','don\'t judge a book by its cover','gr'],
+['loin des yeux, loin du cœur','out of sight, out of mind','gr'],['mieux vaut tard que jamais','better late than never','gr'],
+['qui ne risque rien n\'a rien','nothing ventured, nothing gained','gr'],['chacun voit midi à sa porte','everyone sees things from their own perspective','gr'],
+['avoir d\'autres chats à fouetter','to have other things to worry about','gr'],['mettre tous ses œufs dans le même panier','to put all one\'s eggs in one basket','gr'],
+['tomber dans les pommes','to faint','gr'],['avoir la grosse tête','to be big-headed','gr'],
+['se serrer les coudes','to stick together / support one another','gr'],['avoir le dernier mot','to have the last word','gr'],
+['jeter l\'éponge','to throw in the towel','gr'],['prendre le taureau par les cornes','to take the bull by the horns','gr'],
+['avoir un coup de foudre','to fall in love at first sight','gr'],['faire d\'une pierre deux coups','to kill two birds with one stone','gr'],
+['avoir le vent en poupe','to be thriving / on the up','gr'],['ne pas mâcher ses mots','not to mince one\'s words','gr'],
+
+// -- QU (35) --
+['la majorité','the majority','qu'],['la minorité','the minority','qu'],
+['une part croissante','a growing proportion','qu'],['une part non négligeable','a significant proportion','qu'],
+['la quasi-totalité','almost all','qu'],['une infime partie','a tiny fraction','qu'],
+['de plus en plus','more and more','qu'],['de moins en moins','less and less','qu'],
+['au fil du temps','over time','qu'],['au cours des dernières décennies','over the last decades','qu'],
+['désormais','from now on / henceforth','qu'],['dorénavant','henceforth','qu'],
+['autrefois','in the past / formerly','qu'],['de nos jours','nowadays','qu'],
+['à l\'heure actuelle','at present','qu'],['sur le long terme','in the long run','qu'],
+['d\'ici quelques années','within a few years','qu'],['dans les décennies à venir','in the decades to come','qu'],
+['proportionnellement à','in proportion to','qu'],['par rapport à','in relation to / compared to','qu'],
+['comparé à','compared to','qu'],['contrairement à','unlike / contrary to','qu'],
+['à l\'instar de','like / following the example of','qu'],['au même titre que','in the same way as','qu'],
+['dans une moindre mesure','to a lesser extent','qu'],['dans une large mesure','to a large extent','qu'],
+['d\'autant plus','all the more','qu'],['autant que','as much as','qu'],
+['davantage','more','qu'],['un tant soit peu','even slightly','qu'],
+['considérablement','considerably','qu'],['sensiblement','noticeably / appreciably','qu'],
+['un écart','a gap / difference','qu'],['un fossé grandissant','a growing divide','qu'],
+['une tendance à la hausse','an upward trend','qu'],
+
+// -- C1 (94) --
+['abandonner','to abandon / to give up','c1'],['accéder','to access','c1'],
+['affronter','to confront','c1'],['apprécier','to appreciate / to appraise','c1'],
+['assister','to attend / to witness','c1'],['assumer','to take on / to take responsibility for','c1'],
+['attribuer','to attribute / to assign','c1'],['avancer','to move forward / to progress','c1'],
+['bouger','to move / to budge','c1'],['cacher','to hide','c1'],
+['charger','to load / to charge','c1'],['chuter','to fall / to tumble','c1'],
+['combler','to fill / to fulfil','c1'],['commander','to order / to command','c1'],
+['commercialiser','to market / to commercialise','c1'],['compléter','to complete','c1'],
+['composer','to compose / to make up','c1'],['concrétiser','to realise / to bring about','c1'],
+['connecter','to connect','c1'],['conquérir','to conquer','c1'],
+['consommer','to consume','c1'],['contenir','to contain / to hold back','c1'],
+['corriger','to correct','c1'],['débarrasser','to clear away / to rid of','c1'],
+['déclarer','to declare','c1'],['décrocher','to obtain / to unhook','c1'],
+['déjeuner','to have lunch','c1'],['démarrer','to start up','c1'],
+['déplacer','to move / to shift','c1'],['détecter','to detect','c1'],
+['détenir','to hold / to detain','c1'],['discuter','to discuss','c1'],
+['distribuer','to distribute','c1'],['diversifier','to diversify','c1'],
+['dormir','to sleep','c1'],['dresser','to draw up / to train (an animal)','c1'],
+['durer','to last','c1'],['écouter','to listen to','c1'],
+['éliminer','to eliminate','c1'],['enregistrer','to record / to save','c1'],
+['étudier','to study','c1'],['examiner','to examine','c1'],
+['exercer','to practise (a profession) / to exert','c1'],['exploiter','to exploit / to make the most of','c1'],
+['fermer','to close','c1'],['figurer','to appear / to feature','c1'],
+['indiquer','to indicate','c1'],['manquer','to miss / to lack','c1'],
+['marquer','to mark','c1'],['mobiliser','to mobilise','c1'],
+['mourir','to die','c1'],['négliger','to neglect','c1'],
+['occuper','to occupy','c1'],['opérer','to operate / to carry out','c1'],
+['opter','to opt','c1'],['organiser','to organise','c1'],
+['parcourir','to travel across / to skim through','c1'],['pénétrer','to penetrate','c1'],
+['percevoir','to perceive / to receive (money)','c1'],['plancher','to work on (a task) / to give a talk','c1'],
+['plonger','to dive / to plunge','c1'],['positionner','to position','c1'],
+['posséder','to possess','c1'],['privilégier','to favour / to prioritise','c1'],
+['qualifier','to qualify / to describe as','c1'],['ramener','to bring back','c1'],
+['rapporter','to bring back / to report','c1'],['rapprocher','to bring closer','c1'],
+['rassurer','to reassure','c1'],['réclamer','to demand / to claim','c1'],
+['recommander','to recommend','c1'],['redresser','to straighten / to set right','c1'],
+['réfléchir','to reflect / to think over','c1'],['remédier','to remedy','c1'],
+['rentrer','to go home / to come back in','c1'],['répéter','to repeat','c1'],
+['retourner','to return / to turn over','c1'],['réunir','to bring together','c1'],
+['saisir','to seize / to grasp','c1'],['sélectionner','to select','c1'],
+['séparer','to separate','c1'],['soigner','to look after / to treat','c1'],
+['souffrir','to suffer','c1'],['stimuler','to stimulate','c1'],
+['terminer','to finish','c1'],['valoir','to be worth','c1'],
+['voyager','to travel','c1'],['casser','to break / to smash','c1'],
+['engager','to hire / to commit','c1'],['exprimer','to express','c1'],
+['intégrer','to integrate','c1'],['peser','to weigh','c1'],
+['prévenir','to warn / to prevent','c1'],['renoncer','to give up / to renounce','c1']
+].map(([fr,en,topic],i)=>({id:topic+"_"+i, fr, en, topic}));
+
+/* =========================================================
+   PROGRESS STORE (Leitner boxes 1-5, localStorage)
+   Note: distinct keys from other vocab apps you may host
+   on the same GitHub Pages account, since localStorage is
+   shared across an entire origin (username.github.io), not
+   per-repository.
+   ========================================================= */
+const STORAGE_KEY = "alevel-fr-progress-v1";
+const STREAK_KEY = "alevel-fr-streak-v1";
+const BOX_INTERVAL_DAYS = {1:0, 2:1, 3:3, 4:7, 5:16};
+
+function loadProgress(){
+  try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+  catch(e){ return {}; }
+}
+function saveProgress(p){ localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); }
+let progress = loadProgress();
+
+function getWordState(id){
+  return progress[id] || {box:1, due:0, seen:0};
+}
+function updateWordState(id, correct){
+  const s = getWordState(id);
+  s.seen = (s.seen||0) + 1;
+  if(correct){ s.box = Math.min(5, s.box+1); }
+  else{ s.box = 1; }
+  const days = BOX_INTERVAL_DAYS[s.box] || 0;
+  s.due = Date.now() + days*24*60*60*1000;
+  progress[id] = s;
+  saveProgress(progress);
+}
+
+function touchStreak(){
+  const today = new Date().toDateString();
+  let st = JSON.parse(localStorage.getItem(STREAK_KEY) || '{"last":null,"count":0}');
+  if(st.last === today) return st.count;
+  const yesterday = new Date(Date.now()-86400000).toDateString();
+  st.count = (st.last === yesterday) ? st.count+1 : 1;
+  st.last = today;
+  localStorage.setItem(STREAK_KEY, JSON.stringify(st));
+  return st.count;
+}
+
+/* =========================================================
+   SETUP STATE
+   ========================================================= */
+let selectedTopics = new Set(Object.keys(TOPICS));
+let direction = "mixed";
+let mode = "choice";
+let sessionLength = 15;
+
+function topicWordCount(code){ return VOCAB.filter(w=>w.topic===code).length; }
+function topicMasteredCount(code){
+  return VOCAB.filter(w=>w.topic===code && getWordState(w.id).box>=4).length;
+}
+
+function renderTopicGrid(){
+  const grid = document.getElementById('topicGrid');
+  grid.innerHTML = "";
+  Object.keys(TOPICS).forEach(code=>{
+    const total = topicWordCount(code);
+    const mastered = topicMasteredCount(code);
+    const div = document.createElement('div');
+    div.className = 'topic-chip' + (selectedTopics.has(code) ? ' on' : '');
+    const dotClass = mastered===total && total>0 ? 'box45' : (mastered>0 ? 'box23' : 'box1');
+    div.innerHTML = `<span class="topic-row-left"><span class="mastery-dot ${dotClass}"></span>
+      <span class="name">${TOPICS[code].name}</span></span>
+      <span class="count">${mastered}/${total}</span>`;
+    div.onclick = ()=>{
+      if(selectedTopics.has(code)) selectedTopics.delete(code); else selectedTopics.add(code);
+      renderTopicGrid();
+    };
+    grid.appendChild(div);
+  });
+}
+function selectAllTopics(all){
+  selectedTopics = new Set(all ? Object.keys(TOPICS) : []);
+  renderTopicGrid();
+}
+
+function setupOptionGroup(gridId, onPick){
+  document.getElementById(gridId).querySelectorAll('.option-btn').forEach(btn=>{
+    btn.onclick = ()=>{
+      document.getElementById(gridId).querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      onPick(btn.dataset.val);
+    };
+  });
+}
+setupOptionGroup('directionGrid', v=>direction=v);
+setupOptionGroup('modeGrid', v=>mode=v);
+setupOptionGroup('lengthGrid', v=>sessionLength=parseInt(v));
+
+function updateHeaderStat(){
+  const mastered = VOCAB.filter(w=>getWordState(w.id).box>=4).length;
+  document.getElementById('headerStat').textContent = `${mastered}/${VOCAB.length} mots maîtrisés`;
+}
+
+/* =========================================================
+   SESSION
+   ========================================================= */
+let session = {queue:[], index:0, correct:0, dir:"fr-en"};
+
+function buildSessionQueue(){
+  const now = Date.now();
+  let pool = VOCAB.filter(w=>selectedTopics.has(w.topic));
+  if(pool.length===0) pool = VOCAB.slice();
+  const due = pool.filter(w=>{ const s=getWordState(w.id); return s.due<=now; });
+  const notDue = pool.filter(w=>{ const s=getWordState(w.id); return s.due>now; });
+  due.sort((a,b)=> getWordState(a.id).box - getWordState(b.id).box);
+  shuffle(due); shuffle(notDue);
+  const queue = due.concat(notDue).slice(0, sessionLength);
+  shuffle(queue);
+  return queue;
+}
+function shuffle(arr){
+  for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; }
+  return arr;
+}
+function pickDirection(){
+  if(direction==="mixed") return Math.random()<0.5 ? "fr-en" : "en-fr";
+  return direction;
+}
+function distractorsFor(word, n){
+  const sameTopic = VOCAB.filter(w=>w.topic===word.topic && w.id!==word.id);
+  const rest = VOCAB.filter(w=>w.topic!==word.topic && w.id!==word.id);
+  shuffle(sameTopic); shuffle(rest);
+  return sameTopic.concat(rest).slice(0,n);
+}
+
+function startSession(){
+  if(selectedTopics.size===0){ alert("Choisissez au moins un thème."); return; }
+  session.queue = buildSessionQueue();
+  session.index = 0;
+  session.correct = 0;
+  if(session.queue.length===0){ alert("Aucun mot dans les thèmes sélectionnés."); return; }
+  showScreen('quiz');
+  renderQuestion();
+}
+
+function showScreen(name){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-'+name).classList.add('active');
+}
+function backToSetup(){ renderTopicGrid(); updateHeaderStat(); showScreen('setup'); }
+
+function renderQuestion(){
+  const w = session.queue[session.index];
+  session.dir = pickDirection();
+  document.getElementById('progressFill').style.width = (100*session.index/session.queue.length)+"%";
+  document.getElementById('quizTopicTag').textContent = TOPICS[w.topic].name;
+  document.getElementById('feedbackLine').textContent = "";
+  document.getElementById('feedbackLine').className = "feedback-line";
+
+  const promptArea = document.getElementById('promptArea');
+  const answerArea = document.getElementById('answerArea');
+  const front = session.dir==="fr-en" ? w.fr : w.en;
+  const back = session.dir==="fr-en" ? w.en : w.fr;
+
+  if(mode==="choice"){
+    promptArea.innerHTML = `<div class="prompt-card">
+        ${session.dir==="fr-en" ? `<button class="audio-btn" onclick="speak('${escapeAttr(w.fr)}')">🔊</button>` : ""}
+        <div class="prompt-word">${front}</div>
+        <div class="prompt-hint">${session.dir==="fr-en" ? "Que signifie ce mot ?" : "Comment dit-on cela en français ?"}</div>
+      </div>`;
+    const opts = shuffle([w].concat(distractorsFor(w,3)));
+    answerArea.innerHTML = `<div class="answer-options">` + opts.map(o=>{
+      const label = session.dir==="fr-en" ? o.en : o.fr;
+      return `<button class="answer-opt" onclick="answerChoice(this,'${o.id}','${w.id}')">${label}</button>`;
+    }).join('') + `</div>`;
+
+  } else if(mode==="listen"){
+    promptArea.innerHTML = `<div class="prompt-card">
+        <button class="audio-btn" onclick="speak('${escapeAttr(w.fr)}')" style="position:static;margin:0 auto 10px;display:flex;">🔊</button>
+        <div class="prompt-word" style="font-size:1.15rem;color:var(--ink-soft);">Écoutez le mot</div>
+        <div class="prompt-hint">Cliquez pour réécouter</div>
+      </div>`;
+    setTimeout(()=>speak(w.fr), 250);
+    const opts = shuffle([w].concat(distractorsFor(w,3)));
+    answerArea.innerHTML = `<div class="answer-options">` + opts.map(o=>
+      `<button class="answer-opt" onclick="answerChoice(this,'${o.id}','${w.id}')">${o.en}</button>`
+    ).join('') + `</div>`;
+
+  } else if(mode==="typing"){
+    promptArea.innerHTML = `<div class="prompt-card">
+        ${session.dir==="fr-en" ? `<button class="audio-btn" onclick="speak('${escapeAttr(w.fr)}')">🔊</button>` : ""}
+        <div class="prompt-word">${front}</div>
+        <div class="prompt-hint">Écrivez la traduction</div>
+      </div>`;
+    answerArea.innerHTML = `<div class="type-row">
+        <input type="text" id="typeInput" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Votre réponse...">
+        <button class="big-btn" style="width:auto;padding:14px 20px;" onclick="answerTyping('${w.id}','${escapeAttr(back)}')">Vérifier</button>
+      </div>`;
+    const inp = document.getElementById('typeInput');
+    inp.focus();
+    inp.addEventListener('keydown', e=>{ if(e.key==="Enter") answerTyping(w.id, back); });
+
+  } else if(mode==="flash"){
+    promptArea.innerHTML = `<div class="flash-card" id="flashCard" onclick="flipCard()">
+        <div class="flash-face" id="flashFace">${front}</div>
+        <div class="flash-sub">Touchez pour voir la traduction</div>
+      </div>`;
+    answerArea.innerHTML = `<div class="grade-row" id="gradeRow" style="display:none;">
+        <button class="grade-again" onclick="answerFlash('${w.id}', false)">Encore en cours</button>
+        <button class="grade-good" onclick="answerFlash('${w.id}', true)">Je le savais</button>
+      </div>`;
+    window._flashFront = front; window._flashBack = back; window._flashFlipped=false;
+  }
+}
+
+function escapeAttr(s){ return s.replace(/'/g,"\\'"); }
+
+function flipCard(){
+  window._flashFlipped = true;
+  document.getElementById('flashFace').textContent = window._flashBack;
+  document.querySelector('.flash-sub').textContent = "";
+  document.getElementById('gradeRow').style.display = 'flex';
+}
+function answerFlash(id, correct){
+  updateWordState(id, correct);
+  if(correct) session.correct++;
+  advance();
+}
+
+function answerChoice(btn, chosenId, correctId){
+  const buttons = document.querySelectorAll('.answer-opt');
+  buttons.forEach(b=>b.disabled = true);
+  const correct = chosenId === correctId;
+  btn.classList.add(correct ? 'correct' : 'wrong');
+  if(!correct){
+    buttons.forEach(b=>{ if(b.onclick.toString().includes(correctId)) b.classList.add('correct'); });
+  }
+  const fb = document.getElementById('feedbackLine');
+  fb.textContent = correct ? "Correct !" : "Incorrect — regardez la bonne réponse ci-dessus.";
+  fb.className = "feedback-line " + (correct?"correct":"wrong");
+  updateWordState(correctId, correct);
+  if(correct) session.correct++;
+  setTimeout(advance, correct ? 700 : 1500);
+}
+
+function normalize(s){
+  return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9 ]/g,"").trim();
+}
+function answerTyping(wordId, correctBack){
+  const inp = document.getElementById('typeInput');
+  if(!inp || inp.disabled) return;
+  const val = inp.value;
+  const norm = normalize(val);
+  const correctNorms = correctBack.split(/\s*\/\s*|\s+or\s+/i).map(normalize);
+  const correct = correctNorms.some(c=> c===norm || (norm.length>2 && (c.includes(norm)||norm.includes(c))));
+  inp.disabled = true;
+  inp.classList.add(correct?'correct':'wrong');
+  const fb = document.getElementById('feedbackLine');
+  fb.textContent = correct ? "Correct !" : `Incorrect — la réponse est : ${correctBack}`;
+  fb.className = "feedback-line " + (correct?"correct":"wrong");
+  updateWordState(wordId, correct);
+  if(correct) session.correct++;
+  setTimeout(advance, correct ? 700 : 1800);
+}
+
+function advance(){
+  session.index++;
+  if(session.index >= session.queue.length){ finishSession(); }
+  else{ renderQuestion(); }
+}
+
+function finishSession(){
+  const streak = touchStreak();
+  document.getElementById('sumCorrect').textContent = session.correct;
+  document.getElementById('sumTotal').textContent = session.queue.length;
+  document.getElementById('sumStreak').textContent = streak;
+  const pct = Math.round(100*session.correct/session.queue.length);
+  document.getElementById('sealText').innerHTML = pct>=80 ? "SESSION<br>RÉUSSIE" : "SESSION<br>TERMINÉE";
+  showScreen('complete');
+}
+
+/* =========================================================
+   AUDIO — speechSynthesis playback (French)
+   ========================================================= */
+function speak(text){
+  if(!('speechSynthesis' in window)) return;
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'fr-FR';
+  u.rate = 0.92;
+  const voices = speechSynthesis.getVoices();
+  const frVoice = voices.find(v=>v.lang && v.lang.toLowerCase().startsWith('fr'));
+  if(frVoice) u.voice = frVoice;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){ speechSynthesis.onvoiceschanged = ()=>{}; }
+
+/* =========================================================
+   STATS SCREEN
+   ========================================================= */
+function showStats(){
+  const list = document.getElementById('statsTopicList');
+  list.innerHTML = "";
+  let newC=0, learnC=0, masterC=0;
+  Object.keys(TOPICS).forEach(code=>{
+    const words = VOCAB.filter(w=>w.topic===code);
+    let n=0,l=0,m=0;
+    words.forEach(w=>{
+      const box = getWordState(w.id).box;
+      const seen = getWordState(w.id).seen;
+      if(!seen){ n++; } else if(box>=4){ m++; } else { l++; }
+    });
+    newC+=n; learnC+=l; masterC+=m;
+    const total = words.length;
+    const row = document.createElement('div');
+    row.className = 'stat-topic-row';
+    row.innerHTML = `<div class="name">${TOPICS[code].name}</div>
+      <div class="bar-track">
+        <div class="bar-seg" style="width:${100*m/total}%;background:var(--sauge);"></div>
+        <div class="bar-seg" style="width:${100*l/total}%;background:var(--or);"></div>
+        <div class="bar-seg" style="width:${100*n/total}%;background:var(--paper-dim);"></div>
+      </div>
+      <div class="pct">${m}/${total}</div>
+      ${l>0 ? `<div class="learning-note">+${l} en cours</div>` : ''}`;
+    list.appendChild(row);
+  });
+  document.getElementById('statNew').textContent = newC;
+  document.getElementById('statLearning').textContent = learnC;
+  document.getElementById('statMastered').textContent = masterC;
+  showScreen('stats');
+}
+
+/* =========================================================
+   INIT
+   ========================================================= */
+renderTopicGrid();
+updateHeaderStat();
+</script>
+</body>
+</html>
